@@ -7,7 +7,8 @@
 use CGI qw/:all/;
 use CGI::Carp qw/fatalsToBrowser warningsToBrowser/;
 
-
+@userdetail=();
+@bleats=();
 sub main() {
     # print start of HTML ASAP to assist debugging if there is an error in the script
     print page_header();
@@ -19,8 +20,9 @@ sub main() {
     $debug = 1;
     $dataset_size = "medium"; 
     $users_dir = "dataset-$dataset_size/users";
-    
+    $bleats_dir = "dataset-$dataset_size/bleats";
     print user_page();
+    print user_bleats();
     print page_trailer();
 }
 
@@ -32,10 +34,16 @@ sub main() {
 sub user_page {
     my $n = param('n') || 0;
     my @users = sort(glob("$users_dir/*"));
+
     my $user_to_show  = $users[$n % @users];
     my $details_filename = "$user_to_show/details.txt";
     open my $p, "$details_filename" or die "can not open $details_filename: $!";
-    $details = join '', <$p>;
+    while (my $line = <$p>){
+	push @userdetail, $line;
+    }
+    @userdetail = grep(!/password: /,@userdetail);
+    @userdetail = grep(!/email: /,@userdetail);
+    $details = join '', @userdetail;
     close $p;
     my $next_user = $n + 1;
     return <<eof
@@ -50,6 +58,41 @@ $details
 eof
 }
 
+
+#
+# show bleats of user n
+#
+
+sub user_bleats {
+    my $n = param('n') || 0;
+    my @users = sort(glob("$users_dir/*"));
+ 
+    my $user_to_show  = $users[$n % @users];
+    my $bleats_filename = "$user_to_show/bleats.txt";
+    open my $p, "$bleats_filename" or die "can not open $bleats_filename: $!";
+    while (my $line = <$p>){
+	open my $b, "$bleats_dir/${line}" or die "cannot open $bleats_dir/${line}: $!";;
+	$bleat_to_show = join '',<$b>;
+	close $b;
+	push @bleats, $bleat_to_show;
+	push @bleats, "<br>";  
+   }
+   my $next_user = $n + 1;
+   @bleats = reverse @bleats;
+   $bleat = join '',@bleats;
+   close $p;
+   return <<eof
+<div class="bitter_user_bleats">
+$bleat
+</div>
+<p>
+<form method="POST" action="">
+    <input type="hidden" name="n" value="$next_user">
+    <input type="submit" value="Next user" class="bitter_button">
+</form>
+eof
+
+}
 
 #
 # HTML placed at the top of every page
