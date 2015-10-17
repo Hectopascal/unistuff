@@ -10,7 +10,9 @@ foreach $arg (@ARGV){
     if ($validity == 1){
         print $arg, " is invalid  - does not contain exactly 16 digits\n";
     } elsif ($validity == 2){
+
         print $arg, " is invalid\n";
+
     } else {
         print $arg, " is valid\n";
     }
