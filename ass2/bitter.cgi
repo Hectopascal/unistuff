@@ -21,11 +21,35 @@ sub main() {
     $dataset_size = "medium"; 
     $users_dir = "dataset-$dataset_size/users";
     $bleats_dir = "dataset-$dataset_size/bleats";
+    print nav_panel();
     print user_page();
     print user_bleats();
     print page_trailer();
 }
 
+#
+# show navigation menu
+#
+
+sub nav_panel(){
+
+
+   return <<eof
+<div class="menu">
+<p>
+<form method="POST" action="">
+    <input type="hidden" name="n" value="Home">
+    <input type="submit" value="Home" class="bitter_button">
+</form>
+<p>
+<form method="POST" action="">
+    <input type="hidden" name="n" value="Home">
+    <input type="submit" value="Home" class="bitter_button">
+</form>
+<p>
+</div>
+eof
+}
 
 #
 # Show unformatted details for user "n".
@@ -46,15 +70,26 @@ sub user_page {
     $details = join '', @userdetail;
     close $p;
     my $next_user = $n + 1;
+   
+    print start_form, "\n";
+    print textarea(-name=>'bleat',
+			  -default=>'Type your complaints',
+			  -rows=>3,
+			  -columns=>60,
+			  -maxlength=>142);
+    print submit('Bleating','Bleat!'),"\n";
+    print end_form, "\n";
+   
     return <<eof
-<div class="bitter_user_details">
-$details
-</div>
-<p>
 <form method="POST" action="">
     <input type="hidden" name="n" value="$next_user">
     <input type="submit" value="Next user" class="bitter_button">
 </form>
+
+<div class="bitter_user_details">
+$details
+</div>
+<p>
 eof
 }
 
