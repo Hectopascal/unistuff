@@ -1,0 +1,4 @@
+fsd
+print "@ARGV", "\n"; prints array individually with spaces 
+
+print @ARGV, "\n"; prints array w/o spaces in between

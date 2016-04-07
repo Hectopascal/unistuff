@@ -1,0 +1,64 @@
+sed used for regex replacement only (in this course)
+
+sed -r -e "s/<regex>/<replce>/_"
+
+group matching in sed:
+
+
+([a-z]+)([0-9]+)
+
+first and second match
+
+eg. 's/([A-Z]+)([0-9]+)/\2\1/g'
+
+'2' refers to second group ([0-9]+)
+'1' refers to first group ([A-Z]+) 
+
+---> first and second group switch around. (backslash used to escape)
+
+
+finger <name>
+--> find zid
+pp <zID/name>   OR acc <name/zID> 
+-->info
+
+xargs 
+takes stdin and each line becomes command line argument
+
+eg. with a list of many many names
+---> xargs acc
+this will list all details
+
+
+
+
+mlalias COMP2041-list
+
+
+
+symbolic linking:
+ln -s <file> <shortcut>
+-s means soft link
+>>>>i.e if you rm <shortcut>, the original file will not be deleted
+
+tilde does not expand in back tick e.g `~`
+
+should use asterisk at the back
+~/filedirectory/blah/blah/*
+
+
+.*? << gives first occurence in regex (LAZY LIMITER)
+
+
+
+
+$@ --> taken as array
+$* -->taken as string
+
+for x in $*
+    prints entire command as string
+for x in $@
+    prints argument by argument
+
+by default IFS is
+IFS=' \t\n'

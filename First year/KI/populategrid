@@ -1,0 +1,124 @@
+int int main(int argc, char *argv[]){
+    int region[19][6][2];
+    int y, x;
+    int regCount =0;
+    int vertCount = 0;
+    y=2;  
+    x=0;
+    vertCount = 0;
+    while(regCount<3){ //first column
+        while(vertCount<6){ //populate y coords
+                region[0][vertCount][0]=y;
+                region[0][vertCount+1][0]=y;
+                y++; 
+                vertCount+=2;
+        }
+        vertCount = 0;
+            while(vertCount<6){ //populate x coords
+            region[0][vertCount][1]=x;
+            region[0][vertCount+1][1]=x+1;
+            vertCount+=2;
+        }
+        vertCount = 0;
+        y+=2; //move to next region below it
+        regCount++;
+    }
+
+    y=1;
+    x=1;
+    vertCount = 0;
+    while(regCount<7){ //second column
+        while(vertCount<6){
+                region[0][vertCount][0]=y;
+                region[0][vertCount+1][0]=y;
+                y++; 
+                vertCount+=2;
+        }
+        vertCount = 0;
+            while(vertCount<6){
+            region[0][vertCount][1]=x;
+            region[0][vertCount+1][1]=x+1;
+            vertCount+=2;
+        }
+        vertCount = 0;
+        y+=2;
+        regCount++;
+    }
+
+    y=0;
+    x=2;
+    vertCount = 0;
+    while(regCount<12){ //third column
+        while(vertCount<6){
+                region[0][vertCount][0]=y;
+                region[0][vertCount+1][0]=y;
+                y++; 
+                vertCount+=2;
+        }
+        vertCount = 0;
+            while(vertCount<6){
+            region[0][vertCount][1]=x;
+            region[0][vertCount+1][1]=x+1;
+            vertCount+=2;
+        }
+        vertCount = 0;
+        y+=2;
+        regCount++;
+    }
+
+    y=1;
+    x=3;
+    vertCount = 0;
+    while(regCount<16){ //fourth column
+        while(vertCount<6){
+                region[0][vertCount][0]=y;
+                region[0][vertCount+1][0]=y;
+                y++; 
+                vertCount+=2;
+        }
+        vertCount = 0;
+            while(vertCount<6){
+            region[0][vertCount][1]=x;
+            region[0][vertCount+1][1]=x+1;
+            vertCount+=2;
+        }
+        vertCount = 0;
+        y+=2;
+        regCount++;
+    }
+
+    y=2;
+    x=4;
+    vertCount = 0;
+    while(regCount<19){ //second column
+        while(vertCount<6){
+                region[0][vertCount][0]=y;
+                region[0][vertCount+1][0]=y;
+                y++; 
+                vertCount+=2;
+        }
+        vertCount = 0;
+            while(vertCount<6){
+            region[0][vertCount][1]=x;
+            region[0][vertCount+1][1]=x+1;
+            vertCount+=2;
+        }
+        vertCount = 0;
+        y+=2;
+        regCount++;
+    }
+    int r=0; 
+    int v=0;
+
+    while(r<19){
+        while(v<6){
+            printf("Region %d:(%d,%d) ",r, region[r][v][0],region[r][v][1]);
+            v++;
+        }
+        v=0;
+        printf("\n");
+        r++;
+    }
+    return 0;
+
+}

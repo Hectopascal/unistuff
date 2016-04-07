@@ -1,0 +1,37 @@
+Results for Tests on 5000 values
+
+Depth = depth of tree, Cost = average #comparisons per search
+
+
+             Ascending Order        Prefix Order        Random Order
+Insert
+Method       Depth      Cost      Depth      Cost        Depth      Cost
+
+L              5,000       3114        13           12        28         16
+
+A              5,000       1887        2954        1115     28         16
+ 
+R              2492        952         1774         674      27         15
+    
+B              204          62          20           14        23        13
+        
+S              33 (?)      24           29(?)       23       1146(?)   23
+
+V              13           12           14           12       15         12
+
+
+Notes (what the above indicates):
+In general, greater depth results in greater costs.
+Random order has relatively low cost throughout.
+
+L (insert at leaves): causes a depth of 5000 with ascending order, resulting in a large number of comparisons. Prefix and random are easier to insert for insertion at leaves.
+
+A (insert at root): large number of comparisons for searching because tree has great depth.  
+
+R (randomly insert at leaf/root): random insertion at leaf and root; takes values in the middle of those given by L and A.
+
+B (insert at leaves, periodically balance tree): Tree is periodically balanced, thus reducing depth and cost to traverse across levels for all number orders.
+
+S (splay tree, moves recent elements to root after insertion): depth changes with search.
+
+V (AVL) insert balances the tree for every value insert, reducing the depth and hence the cost to traverse it. This also results in a relatively consistent depth and cost for all the orders.

@@ -1,0 +1,25 @@
+Diary
+
+17/09/15    16:00 - 16:30   Understanding assignment
+24/09/15    16:00 - 17:30   Coding > echo
+26/09/15    ~16:00            Realised I got the deadline wrong rip
+27/09/15    12:00 - 17:00   Coding > Subset 0-2 (somewhat) done
+27/09/15    19:30 - 23:00   Coding > basic tests passed but glitchy
+27/09/15    23:00             Gave up on nested loops
+27/09/15    23:00 - 00:03   Debugging > indentation glitches a lot
+27/09/15    00:25 - 00:55   Coding > Nested loops and singled out import
+27/09/15    01:00 - 01:55   Coding > made a case function that doesn't really work
+27/09/15    02:00 - 02:55   Coding > wrote more tests that I can't pass
+
+
+
+
++++++++++++++++ DEBUG LOG
+27/09/15    23:15   Found looping issue: importing glob/sys etc. uses splice and changes the array index, which was unaccounted for previously.
+27/09/15    23:32   Fixed some regex issues but indents are glitching again
+27/09/15    23:30   Fixed indentation, should work okay
+27/09/15    23:40   Fixed regex issues. Forgot that + sign is special.
+27/09/15    23:42   'Passed' all given examples except for last. Adding operators that I missed out.
+27/09/15    23:53   Copying and pasting/hardcoding at this stage...
+28/09/15    00:03   Singled out more subroutines
+28/09/15    00:52   Apparently nested loops took 5 minutes to implement. A lot shorter than I expected.

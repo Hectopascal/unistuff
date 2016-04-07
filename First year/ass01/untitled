@@ -1,0 +1,51 @@
+static void freeAndLinkHeader(vaddr_t fIndex) {
+    headerPtr toFree = pointerfy(fIndex);
+    toFree->magic = MAGIC_FREE;
+
+    //Get index and curr
+    vaddr_t index = free_list_ptr;
+    headerPtr curr = pointerfy(index);               
+    //Special case 1 : Just 1 free memory left.
+    if (index == curr->next) {
+        // Fix the list
+        toFree->next = toFree->prev = index;
+        curr->next = curr->prev = fIndex;
+        //finding which is the first free memory
+        if (index < fIndex){
+            free_list_ptr = index;            
+        } else {
+            free_list_ptr = fIndex;
+        }
+        return;
+    }
+    // Get aIndex and after
+    vaddr_t aIndex = pointerfy(index)->next; 
+    headerPtr after = pointerfy(aIndex);
+
+    while ((index > fIndex) || (aIndex < fIndex)) {  //If it's not between two adjacent free memory
+        index = pointerfy(index)->next;
+        aIndex = pointerfy(aIndex)->next;
+        if (index == free_list_ptr) {
+            //Special case 2 and 3 : freeing the first one/last one
+            toFree->next = index;                       
+            toFree->prev = curr->prev;
+            headerPtr prevHeader = pointerfy(curr->prev);
+            prevHeader->next = fIndex;
+            curr->prev = fIndex; 
+            //If fIndex is the first memory, need to change free_list_ptr
+            if ((index > fIndex) && (aIndex > fIndex)) { 
+                free_list_ptr = fIndex;
+            }
+            return; 
+        }
+    }
+    // We found it! Fix the list.
+    curr = pointerfy(index);
+    after = pointerfy(aIndex);
+    toFree = pointerfy(fIndex);
+    after->prev = fIndex;
+    curr->next = fIndex;
+    toFree->next = aIndex;
+    toFree->prev = index;
+    return;
+}
